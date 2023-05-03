@@ -1,0 +1,53 @@
+﻿@*@model IEnumerable<ApplicationUser>*@
+@model List<Dictionary<string, string>>
+
+<h2>Rakenduse kasutajad</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            @*<th>Nimi</th>
+            <th>E-mail</th>
+            <th>Telefoninumber</th>
+            <th></th>
+            <th></th>*@
+
+            <th>Kasutaja</th>
+            <th>Email</th>
+            <th>Telefon</th>
+            <th>LisaInfo</th>
+            <th>Roll</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                @*<td>@user.FLName</td>
+                <td>@user.Email</td>
+                <td>@user.Phone</td>*@
+
+                <td>@user["FLName"]</td>
+                <td>@user["Email"]</td>
+                <td>@user["Phone"]</td>
+                <td>@user["AdditionalInfo"]</td>
+                <td>@user["Role"]</td>
+                <td>
+                    <form method="post" asp-action="Delete" asp-route-id="@user["Id"]" onsubmit="return confirm('Kas olete kindel, et soovite kasutaja kustutada?');">
+                        <button class="btn btn-danger" type="submit">Kustuta</button>
+                    </form>
+                </td>
+
+                @*<td>
+                    <a class="btn btn-primary" asp-controller="Users" asp-action="Edit" asp-route-id="@user.Id">Muuda</a>
+                </td>
+                <td>
+                    <form method="post" asp-action="Delete" asp-controller="Users" asp-route-id="@user.Id" onsubmit="return confirm('Kas olete kindel, et soovite kasutaja kustutada?');">
+                        <button class="btn btn-danger" type="submit">Kustuta</button>
+                    </form>
+                </td>*@
+            </tr>
+        }
+    </tbody>
+</table>

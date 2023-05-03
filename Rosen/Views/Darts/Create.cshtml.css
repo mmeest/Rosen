@@ -1,0 +1,16 @@
+﻿body {
+}
+.mainBackground {
+    background-color: blue;
+    background-image: url('images/darts.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+div{
+    opacity:0.95;
+}
+input[type="submit"]{
+    margin: 10px;
+}

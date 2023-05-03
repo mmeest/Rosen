@@ -1,0 +1,144 @@
+﻿@page
+@model RegisterModel
+@{
+    ViewData["Title"] = "Registreerimine";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="row">
+    <div class="col-md-4">
+        <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+            <h2>Lisa uus kasutaja.</h2>
+            <hr />
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.FLName" class="form-control" aria-required="true" />
+                <label asp-for="Input.FLName">Kasutajanimi</label>
+                <span asp-validation-for="Input.FLName" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <label asp-for="Input.Email">Email</label>
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3" style="display:none;">
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" value="12345678"/>
+                <label asp-for="Input.Password">Salasõna</label>
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3" style="display:none;">
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" value="12345678"/>
+                <label asp-for="Input.ConfirmPassword">Salasõna kinnitus</label>
+                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <h3>Salasõna: '12345678'</h3>
+            </div>
+            
+            <div class="form-floating mb-3">
+                <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class="form-select" aria-required="true">
+                    <option disabled selected>Vali roll</option>
+                </select>
+                <span asp-validation-for="Input.Role" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.Phone" class="form-control" />
+                <label asp-for="Input.Phone">Telefoninumber</label>
+                <span asp-validation-for="Input.Phone" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <textarea asp-for="Input.AdditionalInfo" class="form-control" rows="5" style="resize: none; height: 100px"></textarea>
+                <label asp-for="Input.AdditionalInfo">Lisainfo</label>
+                <span asp-validation-for="Input.AdditionalInfo" class="text-danger"></span>
+            </div>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Registreeri</button>
+        </form>
+    </div>
+    <script>
+        // Script selle tarvis, et rollid dropdown menüüst ära ei kaoks
+
+        $('select[name="Input.Role"]').load(window.location.href + ' select[name="Input.Role"]>*', function() {
+        $('select[name="Input.Role"]').val('@Model.Input.Role');
+        });
+    </script>
+    <div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Kasutajarollide õigused.</h3>
+            <hr />
+
+            <table class="table" style="">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Admin</th>
+                        <th>Paigaldaja</th>
+                        <th>Transport</th>
+                        <th>Tootmine</th>
+                        <th>Külaline</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Kasutajate lisamine</td>
+                        <td>✓</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Kasutajate </td>
+                        <td>✓</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td> lisamine</td>
+                        <td>✓</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>-</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+            @*<h3>Use another service to register.</h3>
+            <hr />
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                    <div>
+                        <p>
+                            There are no external authentication services configured. See this <a href="https://go.microsoft.com/fwlink/?LinkID=532715">article
+                            about setting up this ASP.NET application to support logging in via external services</a>.
+                        </p>
+                    </div>
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }*@
+        </section>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,14 @@
+﻿body {
+}
+.mainBackground {
+    background-color: blue;
+    background-image: url('images/darts.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+input[type="submit"]{
+    margin: 10px;
+}
+th, td{
+    background-color: wheat;
+}
